@@ -1,5 +1,5 @@
 package mvc;
-
+import tools.Bean;
 public class Model extends Bean {
 private boolean unsavedChanges;
 private String fileName;
@@ -32,9 +32,9 @@ public Model(boolean change, String file){
         this.firePropertyChange("fileName", old, this.fileName);
     }
 
-    // ask
     public void changed(){
     this.unsavedChanges = true;
+    // Prof stated this is okay
     firePropertyChange("unSavedChanges", false, true);
     }
 }

@@ -1,8 +1,8 @@
 package mvc;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import javax.swing.*;
+import tools.*;
 
-public class View {
+public class View extends JPanel {
     private Model model;
 }
