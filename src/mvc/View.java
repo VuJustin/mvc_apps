@@ -5,4 +5,7 @@ import tools.*;
 
 public class View extends JPanel {
     private Model model;
+    // Remove
+    private int a[];
+
 }
