@@ -19,30 +19,47 @@ public class AppPanel extends JPanel implements ActionListener {
     private Model model;
     private ControlPanel controls;
     private View view;
+    private AppFactory appFactory;
+    private static int WIDTH = 500;
+    private static int HEIGHT = 300;
 
-    public AppPanel() {
+
+
+    public AppPanel(AppFactory appFactory) {
+        this.appFactory = appFactory;
         // create model, install controls & view
-        model = new Model();
-        view = new View();
-        controls = new ControlPanel();
-        this.setLayout((new GridLayout(1, 2)));
-        this.add(controls);
-        this.add(view);
-        // create my frame with menus and display it
-        SafeFrame frame = new SafeFrame();
-        Container cp = frame.getContentPane();
-        cp.add(this);
-        frame.setJMenuBar(this.createMenuBar());
-        frame.setTitle(model.getFileName());
-        frame.setSize(500, 300);
-        frame.setVisible(true);
+        this.model = appFactory.makeModel();
+        this.view = appFactory.makeView();
+        this.view.setBackground(Color.GRAY);
+//        model = new Model();
+//        view = new View();
+
+       controls = new ControlPanel();
+       controls.setBackground(Color.PINK);
+       this.setLayout((new GridLayout(1, 2)));
+       this.add(controls);
+       this.add(view);
+       // create my frame with menus and display it
+       SafeFrame frame = new SafeFrame();
+       Container cp = frame.getContentPane();
+       cp.add(this);
+       frame.setJMenuBar(this.createMenuBar());
+       frame.setTitle(model.getFileName());
+       frame.setSize(WIDTH, HEIGHT);
+       frame.setVisible(true);
+
+//        ------------------------------
+
+        
+
+
     }
 
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
         JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
         result.add(fileMenu);
-        JMenu editMenu = Utilities.makeMenu("Edit", new String[]{"North", "South", "East", "West", "Pen", "Clear", "Color", "Steps"}, this);
+        JMenu editMenu = Utilities.makeMenu("Edit", appFactory.getEditCommands(), this);
         result.add(editMenu);
         JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
         result.add(helpMenu);
@@ -52,12 +69,16 @@ public class AppPanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String cmmd = e.getActionCommand();
         try {
+
+            // How to execute other commands?
             switch (cmmd) {
                 case "Save": {
-                    String fName = Utilities.getFileName((String) null, false);
-                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
-                    os.writeObject(this.model);
-                    os.close();
+                    save();
+                    break;
+                }
+
+                case "Save As": {
+                    saveAs();
                     break;
                 }
 
@@ -67,7 +88,7 @@ public class AppPanel extends JPanel implements ActionListener {
                         String fName = Utilities.getFileName((String) null, true);
                         ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
                         model = (Model) is.readObject();
-                        //view.setTurtle(turtle);
+                        // need View class to be done
                         is.close();
                     }
 
@@ -77,8 +98,8 @@ public class AppPanel extends JPanel implements ActionListener {
 
                 case "New": {
                     if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
-                        model = new Model();
-                        //view.setTurtle(turtle);
+                        model = appFactory.makeModel();
+                        // need View class to be done
                     }
                     break;
                 }
@@ -90,30 +111,51 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
 
                 case "About": {
-                    Utilities.inform("Justin Vu, Assignment: Turtle Graphics, 3/2/23");
+                    Utilities.inform("Team #2. Mine Field");
                     break;
                 }
 
                 case "Help": {
-                    String[] cmmds = new String[]{
-                            "North: Changes Turtle's Direction to North", "South: Changes Turtle's Direction to South",
-                            "East: Changes Turtle's Direction to East", "West: Changes Turtle's Direction to West",
-                            "Pen: Changes Turtle's Pen", "Steps: Moves turtle based on steps",
-                            "Color: Changes Turtle's color", "Clear: Clears out turtle's path"
+                    String[] cmmds = new String[] {
+
+                            // Add instructions here
+
                     };
                     Utilities.inform(cmmds);
                     break;
 
                 }
-                // If command is not recognized, throw out exception
                 default: {
-                    throw new Exception("Unrecognized command: " + cmmd);
+                    Command command = appFactory.makeEditCommand(cmmd);
+                    command.execute();
                 }
             }
 
         } catch (Exception ex) {
-            // Prints out exception errors
-            Utilities.error(ex);
+            handleException(ex);
+        }
+
+    }
+    
+    protected void handleException(Exception e) {
+        Utilities.error(e);
+    }
+    
+    private void saveAs() throws Exception {
+        String fName = Utilities.getFileName((String) null, false);
+        ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
+        os.writeObject(this.model);
+        os.close();
+    }
+    
+    private void save() throws Exception {
+        
+        if (model.getFileName() == null) {
+            saveAs();
+        } else {   
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(model.getFileName()));
+            os.writeObject(model);
+            os.close();
         }
     }
 
