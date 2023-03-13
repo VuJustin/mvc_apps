@@ -20,7 +20,8 @@ public class AppPanel extends JPanel implements ActionListener {
     private ControlPanel controls;
     private View view;
 
-    public AppPanel() {
+    // note: Stoplight Panel requires factory as a parameter
+    public AppPanel(AppFactory factory) {
         // create model, install controls & view
         model = new Model();
         view = new View();
