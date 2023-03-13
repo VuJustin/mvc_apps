@@ -3,11 +3,11 @@ package stopLight;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
-public class StoplightShape {
+public class StopLightShape {
     private Stoplight light;
     private int height, width, xc, yc;
     private Ellipse2D.Double redLight, yellowLight, greenLight;
-    public StoplightShape(Stoplight light, int xc, int yc, int height) {
+    public StopLightShape(Stoplight light, int xc, int yc, int height) {
         this.light = light;
         this.height = height;
         this.xc = xc;
@@ -19,7 +19,7 @@ public class StoplightShape {
         yellowLight = new Ellipse2D.Double(xc + delta, yc + diam + 2 * delta, diam, diam);
         greenLight = new Ellipse2D.Double(xc + delta, yc + 2 * diam + 3 * delta, diam, diam);
     }
-    public StoplightShape(Stoplight light) {
+    public StopLightShape(Stoplight light) {
         this(light, 50, 50, 100);
     }
 
