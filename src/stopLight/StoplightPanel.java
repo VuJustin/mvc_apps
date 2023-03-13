@@ -10,9 +10,11 @@ public class StoplightPanel extends AppPanel {
         super(factory);
         change = new JButton("Change");
         change.addActionListener(this);
+
         // Was orginally controlPanel.add, changed to super.add()
-        // Problem with button
-        super.add(change);
+        // Fixed
+        super.insertComponent(change);
+
     }
 
     public static void main(String[] args) {
