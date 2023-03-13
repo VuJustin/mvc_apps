@@ -6,18 +6,17 @@ import java.beans.PropertyChangeListener;
 
 
 public class View extends JPanel implements PropertyChangeListener {
-    private Model model;
+    protected Model model;
 
     public View(Model m){
         this.model = m;
         m.addPropertyChangeListener(this);
     }
-
     public View() {
         model.addPropertyChangeListener(this);
     }
 
-    public void updateModel(Model m){
+    public void setModel(Model m){
         if(this.model != null){
             this.model.removePropertyChangeListener(this);
         }

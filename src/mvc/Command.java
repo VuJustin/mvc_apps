@@ -1,6 +1,6 @@
 package mvc;
 
-abstract class Command {
+public abstract class Command {
 
     protected Model model;    
 

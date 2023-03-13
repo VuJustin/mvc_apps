@@ -14,23 +14,28 @@ import java.io.ObjectOutputStream;
 
 /*
  * This is the MVC controller.
+    Problems with: New, Save, Open
+    Button in wrong place
  */
+
+
 public class AppPanel extends JPanel implements ActionListener {
     private Model model;
     private ControlPanel controls;
     private View view;
     private AppFactory appFactory;
+
+    private SafeFrame frame;
     private static int WIDTH = 500;
     private static int HEIGHT = 300;
-
-
-
 
     public AppPanel(AppFactory appFactory) {
         this.appFactory = appFactory;
         // create model, install controls & view
         this.model = appFactory.makeModel();
-        this.view = appFactory.makeView();
+        //Setting the name of model
+        this.model.setFileName(appFactory.getTitle());
+        this.view = appFactory.makeView(model);
         this.view.setBackground(Color.GRAY);
 //        model = new Model();
 //        view = new View();
@@ -41,13 +46,13 @@ public class AppPanel extends JPanel implements ActionListener {
        this.add(controls);
        this.add(view);
        // create my frame with menus and display it
-       SafeFrame frame = new SafeFrame();
+       frame = new SafeFrame();
        Container cp = frame.getContentPane();
        cp.add(this);
        frame.setJMenuBar(this.createMenuBar());
        frame.setTitle(model.getFileName());
        frame.setSize(WIDTH, HEIGHT);
-       frame.setVisible(true);
+       //frame.setVisible(true);
 
 //        ------------------------------
 
@@ -100,7 +105,7 @@ public class AppPanel extends JPanel implements ActionListener {
                 case "New": {
                     if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
                         model = appFactory.makeModel();
-                        // need View class to be done
+                        view.setModel(model);
                     }
                     break;
                 }
@@ -112,22 +117,19 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
 
                 case "About": {
-                    Utilities.inform("Team #2. Mine Field");
+                    Utilities.inform(appFactory.about());
                     break;
                 }
 
                 case "Help": {
-                    String[] cmmds = new String[] {
-
-                            // Add instructions here
-
-                    };
+                    String[] cmmds = appFactory.getHelp();
                     Utilities.inform(cmmds);
                     break;
 
                 }
                 default: {
-                    Command command = appFactory.makeEditCommand(cmmd);
+                    //throw new Exception("Unrecognized command: " + cmmd);
+                    Command command = appFactory.makeEditCommand(model, cmmd, this);
                     command.execute();
                 }
             }
@@ -158,6 +160,10 @@ public class AppPanel extends JPanel implements ActionListener {
             os.writeObject(model);
             os.close();
         }
+    }
+
+    public void display(){
+        frame.setVisible(true);
     }
 
     /*
