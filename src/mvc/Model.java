@@ -1,8 +1,8 @@
 package mvc;
 import tools.Bean;
 public abstract class Model extends Bean {
-private boolean unsavedChanges;
-private String fileName;
+private boolean unsavedChanges = false;
+private String fileName = null;
 
     public boolean getUnsavedChanges() {
         return unsavedChanges;
@@ -27,8 +27,6 @@ private String fileName;
         // Prof stated this is okay
         firePropertyChange("unSavedChanges", false, true);
     }
-    
-    // will need a func to change the flag to false when ever the model save?
 }
 
 
