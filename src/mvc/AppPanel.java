@@ -25,6 +25,7 @@ public class AppPanel extends JPanel implements ActionListener {
 
 
 
+
     public AppPanel(AppFactory appFactory) {
         this.appFactory = appFactory;
         // create model, install controls & view
