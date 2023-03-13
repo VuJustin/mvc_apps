@@ -19,10 +19,9 @@ import java.io.ObjectOutputStream;
 
 public class AppPanel extends JPanel implements ActionListener {
     private Model model;
-    private ControlPanel controls;
+    protected ControlPanel controls;
     private View view;
     private AppFactory appFactory;
-
     private SafeFrame frame;
     private static int WIDTH = 500;
     private static int HEIGHT = 300;
@@ -34,7 +33,7 @@ public class AppPanel extends JPanel implements ActionListener {
         // Setting the name of model
         this.view = appFactory.makeView(model);
         this.view.setBackground(Color.GRAY);
-
+        // Control Panel created
         controls = new ControlPanel();
         controls.setBackground(Color.PINK);
         this.setLayout((new GridLayout(1, 2)));
@@ -47,7 +46,6 @@ public class AppPanel extends JPanel implements ActionListener {
         cp.add(this);
         frame.setJMenuBar(this.createMenuBar());
         frame.setSize(WIDTH, HEIGHT);
-
     }
 
     protected JMenuBar createMenuBar() {
@@ -158,19 +156,28 @@ public class AppPanel extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
+    //Added a insertComponent to add components into control panel
+    public void insertComponent(JComponent a){
+        controls.add(a);
+    }
     /*
      * It's often handy to have control panel as an
      * innerclass so its controls can be accessed from
      * outer class and vice-versa. It also encapsulates all the messy layout logic
      */
     class ControlPanel extends JPanel {
+        public JPanel controlPanel;
         public ControlPanel() {
             setBackground(Color.PINK);
-            JPanel p = new JPanel();
+            controlPanel = new JPanel();
             /* Should Control Panel add buttons for mvc? */
             /* Adding Action Listeners to the buttons and adding it into the panel */
         }
-
+        public void addC(JComponent a){
+            controlPanel = new JPanel();
+            controlPanel.add(a);
+            add(a);
+        }
     }
 
 }
