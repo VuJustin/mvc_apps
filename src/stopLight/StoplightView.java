@@ -13,7 +13,9 @@ public class StoplightView extends View {
         super.paintComponent(gc);
         Color oldColor = gc.getColor();
         Stoplight light = (Stoplight)model;
-        StoplightShape shape = new StoplightShape(light);
+
+        StopLightShape shape = new StopLightShape(light);
+
         shape.draw((Graphics2D) gc);
         gc.setColor(oldColor);
     }

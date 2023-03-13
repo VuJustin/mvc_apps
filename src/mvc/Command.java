@@ -5,6 +5,7 @@ protected Model model;
 public Command(Model model){
 
 }
+
 public abstract void execute();
 
 }
