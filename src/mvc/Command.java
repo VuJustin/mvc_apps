@@ -1,7 +1,11 @@
 package mvc;
 
 public abstract class Command {
-private Model a;
+protected Model model;
+public Command(Model model){
+
+}
+
 public abstract void execute();
 
 }
