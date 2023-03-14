@@ -13,18 +13,33 @@ public class MinefieldFactory implements AppFactory {
     }
 
     public String[] getEditCommands() {
-        return new String[] { "Change" };
+        return new String[] { "N", "S", "E", "W", "NE", "NW", "SW", "SE" };
+
     }
 
     // source added 3/15 to support text fields
     public Command makeEditCommand(Model model, String type, Object source) {
-        if (type == "Change")
+        if (type == "N")
+            return new MoveCommand(model);
+        else if (type == "S")
+            return new MoveCommand(model);
+        else if (type == "E")
+            return new MoveCommand(model);
+        else if (type == "W")
+            return new MoveCommand(model);
+        else if (type == "NW")
+            return new MoveCommand(model);
+        else if (type == "NE")
+            return new MoveCommand(model);
+        else if (type == "SW")
+            return new MoveCommand(model);
+        else if (type == "SE")
             return new MoveCommand(model);
         return null;
     }
 
     public String getTitle() {
-        return "Stop Light Simulator";
+        return "Minefield";
     }
 
     public String[] getHelp() {
@@ -32,7 +47,7 @@ public class MinefieldFactory implements AppFactory {
     }
 
     public String about() {
-        return "Stoplight Simulator version 1.0. Copyright 2020 by Cyberdellic Designs";
+        return "Minefield version 3.0. Copyright 2020 by Team 2";
     }
 
 }

@@ -23,8 +23,8 @@ public class AppPanel extends JPanel implements ActionListener {
     private View view;
     private AppFactory appFactory;
     private SafeFrame frame;
-    private static int WIDTH = 500;
-    private static int HEIGHT = 300;
+    private static int WIDTH = 600;
+    private static int HEIGHT = 362;
 
     public AppPanel(AppFactory appFactory) {
         this.appFactory = appFactory;
@@ -140,9 +140,9 @@ public class AppPanel extends JPanel implements ActionListener {
         os.writeObject(this.model);
         os.close();
     }
-    
+
     private void save() throws Exception {
-        
+
         if (model.getFileName() == null) {
             saveAs();
         } else {
@@ -156,10 +156,11 @@ public class AppPanel extends JPanel implements ActionListener {
         frame.setVisible(true);
     }
 
-    //Added a insertComponent to add components into control panel
-    public void insertComponent(JComponent a){
+    // Added a insertComponent to add components into control panel
+    public void insertComponent(JComponent a) {
         controls.add(a);
     }
+
     /*
      * It's often handy to have control panel as an
      * innerclass so its controls can be accessed from
@@ -167,13 +168,15 @@ public class AppPanel extends JPanel implements ActionListener {
      */
     class ControlPanel extends JPanel {
         public JPanel controlPanel;
+
         public ControlPanel() {
             setBackground(Color.PINK);
             controlPanel = new JPanel();
             /* Should Control Panel add buttons for mvc? */
             /* Adding Action Listeners to the buttons and adding it into the panel */
         }
-        public void addC(JComponent a){
+
+        public void addC(JComponent a) {
             controlPanel = new JPanel();
             controlPanel.add(a);
             add(a);

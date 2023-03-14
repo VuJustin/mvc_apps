@@ -1,15 +1,17 @@
 package minefield;
 
-import javax.swing.JButton;
-
 import mvc.AppFactory;
 import mvc.AppPanel;
+import javax.swing.*;
+
+import mvc.*;
 
 public class MinefieldPanel extends AppPanel {
     private JButton northButton, southButton, eastButton, westButton,
             northeastButton, northwestButton, southeastButton, southwestButton;
 
     public MinefieldPanel(AppFactory factory) {
+
         super(factory);
 
         northButton = new JButton("N");
@@ -31,6 +33,7 @@ public class MinefieldPanel extends AppPanel {
 
         // Was orginally controlPanel.add, changed to super.add()
         // Fixed
+        super.add(Box.createHorizontalStrut(10));
         super.insertComponent(northButton);
         super.insertComponent(southButton);
         super.insertComponent(eastButton);
