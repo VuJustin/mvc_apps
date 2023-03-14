@@ -33,7 +33,7 @@ public class MinefieldPanel extends AppPanel {
 
         // Was orginally controlPanel.add, changed to super.add()
         // Fixed
-        super.add(Box.createHorizontalStrut(10));
+
         super.insertComponent(northButton);
         super.insertComponent(southButton);
         super.insertComponent(eastButton);
