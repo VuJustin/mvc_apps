@@ -43,7 +43,14 @@ public class MinefieldFactory implements AppFactory {
     }
 
     public String[] getHelp() {
-        return new String[] { "click Change to cycle through colors" };
+        return new String[] { "Click N to move up",
+                "Click S to move down",
+                "Click W to move left",
+                "Click E to move right",
+                "Click NW to move upper left",
+                "Click NE to move upper right",
+                "Click SW to move lower left",
+                "Click SE to move lower right" };
     }
 
     public String about() {

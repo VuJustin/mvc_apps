@@ -4,6 +4,7 @@ import mvc.*;
 import java.awt.*;
 
 public class MinefieldView extends View {
+
     public MinefieldView(Minefield minefield) {
         super(minefield);
     }
@@ -16,6 +17,7 @@ public class MinefieldView extends View {
         MinefieldShape shape = new MinefieldShape(minefield);
 
         shape.draw((Graphics2D) gc);
+
         gc.setColor(oldColor);
     }
 }
