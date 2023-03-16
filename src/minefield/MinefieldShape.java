@@ -22,13 +22,11 @@ public class MinefieldShape {
 
     public void draw(Graphics2D gc) {
         Color oldColor = gc.getColor();
-        for (int i = 0; i < 20; i++) {
-            gc.setColor(Color.BLACK);
-            gc.fillRect(xc, yc, size, size);
-            gc.setColor(oldColor);
-            gc.fillRect(xc - BORDER_THICKNESS, yc - BORDER_THICKNESS, size - 1, size - 1);
-            xc += 15;
-        }
+        gc.setColor(Color.BLACK);
+        gc.fillRect(xc, yc, size, size);
+        gc.setColor(oldColor);
+        gc.fillRect(xc - BORDER_THICKNESS, yc - BORDER_THICKNESS, size - 1, size - 1);
+        xc += 15;
 
     }
 }

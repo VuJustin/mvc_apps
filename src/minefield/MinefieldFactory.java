@@ -19,23 +19,34 @@ public class MinefieldFactory implements AppFactory {
 
     // source added 3/15 to support text fields
     public Command makeEditCommand(Model model, String type, Object source) {
-        if (type == "N")
-            return new MoveCommand(model);
-        else if (type == "S")
-            return new MoveCommand(model);
-        else if (type == "E")
-            return new MoveCommand(model);
-        else if (type == "W")
-            return new MoveCommand(model);
-        else if (type == "NW")
-            return new MoveCommand(model);
-        else if (type == "NE")
-            return new MoveCommand(model);
-        else if (type == "SW")
-            return new MoveCommand(model);
-        else if (type == "SE")
-            return new MoveCommand(model);
-        return null;
+        Heading heading = null;
+        switch (type) {
+            case "N":
+                heading = Heading.NORTH;
+                break;
+            case "S":
+                heading = Heading.SOUTH;
+                break;
+            case "E":
+                heading = Heading.EAST;
+                break;
+            case "W":
+                heading = Heading.WEST;
+                break;
+            case "NW":
+                heading = Heading.NORTHWEST;
+                break;
+            case "NE":
+                heading = Heading.NORTHEAST;
+                break;
+            case "SW":
+                heading = Heading.SOUTHWEST;
+                break;
+            case "SE":
+                heading = Heading.SOUTHEAST;
+                break;
+        }
+        return new MoveCommand(model, heading);
     }
 
     public String getTitle() {
