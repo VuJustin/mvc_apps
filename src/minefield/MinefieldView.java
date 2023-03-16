@@ -8,9 +8,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 class Cell extends JLabel {
-
     Patch patch;
-
 }
 
 public class MinefieldView extends View {
@@ -18,7 +16,6 @@ public class MinefieldView extends View {
 
     public MinefieldView(Minefield minefield) {
         super(minefield);
-
         initView();
 
     }
@@ -57,8 +54,10 @@ public class MinefieldView extends View {
                     cells[row][col].setBackground(Color.white);
                     cells[row][col].setBorder(BorderFactory.createLineBorder(Color.green));
                 }
-
+                this.add(cells[row][col]);
             }
         }
     }
+
+
 }
