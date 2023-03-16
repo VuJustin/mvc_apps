@@ -4,6 +4,7 @@ import mvc.*;
 import java.awt.*;
 
 public class MinefieldView extends View {
+    private Cell cells[][];
     public MinefieldView(Minefield minefield) {
         super(minefield);
     }
