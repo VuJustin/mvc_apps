@@ -153,6 +153,7 @@ public class Minefield extends Model {
         playerLocation.setLocation(newRow, newCol);
         patches[getPlayerXC()][getPlayerYC()].occupied = true;
 
+
         changed();
     }
 }

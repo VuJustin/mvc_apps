@@ -1,5 +1,6 @@
 package minefield;
 
+
 import java.io.Serializable;
 
 public class Patch implements Serializable {
@@ -7,6 +8,7 @@ public class Patch implements Serializable {
 
     boolean mined = false;
     int numMinedNubrs = 0;
+
     boolean occupied = false;
     boolean goal = false;
 }
