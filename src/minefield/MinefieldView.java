@@ -57,8 +57,9 @@ public class MinefieldView extends View {
                     cells[row][col].setBackground(Color.white);
                     cells[row][col].setBorder(BorderFactory.createLineBorder(Color.green));
                 }
-
+                this.add(cells[row][col]);
             }
         }
+
     }
 }
