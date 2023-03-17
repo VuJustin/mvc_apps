@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 
 public class MinefieldView extends View {
     private Cell cells[][];
+
+    //These are never used
     private Minefield mineField;
     private int cur_x;
     private int cur_y;
@@ -42,13 +44,21 @@ public class MinefieldView extends View {
         }
 
         System.out.println("mineField, after");
-        Iterator<Minefield.Point> a = mineField.getPath();
+        Iterator<Minefield.Point> a = ((Minefield) model).getPath();
         Minefield.Point path;
-        while(a.hasNext()){
+        //If a has the first point
+        if(a.hasNext()) {
             path = a.next();
-            this.cells[path.getX()][path.getY()].setBackground(Color.RED);
-            this.cells[path.getX()][path.getY()].setBorder(BorderFactory.createLineBorder(Color.WHITE));
-            this.cells[path.getX()][path.getY()].setText("" + cells[path.getX()][path.getY()].patch.numMinedNubrs);
+            this.cells[0][0].setBackground(Color.RED);
+            this.cells[0][0].setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            this.cells[0][0].setText("" + cells[path.getX()][path.getY()].patch.numMinedNubrs);
+            // if Path has next points
+            while (a.hasNext()) {
+                path = a.next();
+                this.cells[path.getX()][path.getY()].setBackground(Color.RED);
+                this.cells[path.getX()][path.getY()].setBorder(BorderFactory.createLineBorder(Color.WHITE));
+                this.cells[path.getX()][path.getY()].setText("" + cells[path.getX()][path.getY()].patch.numMinedNubrs);
+            }
         }
 
     }
