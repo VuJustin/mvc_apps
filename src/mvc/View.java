@@ -24,14 +24,15 @@ public class View extends JPanel implements PropertyChangeListener {
         this.model.initSupport();
         this.model.addPropertyChangeListener(this);
         repaint();
-        
+        System.out.println("setModel in mvc");
+
 
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        revalidate();
-        updateUI();
+//        revalidate();
+//        updateUI();
         repaint();
     }
 }
