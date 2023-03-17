@@ -12,10 +12,6 @@ public class Minefield extends Model {
     private int dim = 10;
 
     public Minefield() {
-        initialize();
-    }
-
-    public void initialize() {
         patches = new Patch[dim][dim];
         Random random = new Random();
 
@@ -34,6 +30,10 @@ public class Minefield extends Model {
         patches[dim - 1][dim - 1].mined = false;
 
         updateMinedNeighbors();
+    }
+
+    public void initialize() {
+
     }
 
     private void updateMinedNeighbors() {
@@ -126,7 +126,7 @@ public class Minefield extends Model {
 
         changed();
     }
-    class Point {
+    class Point implements Serializable {
         public int x, y;
 
         public Point(int x, int y) {

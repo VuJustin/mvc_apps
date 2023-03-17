@@ -11,33 +11,44 @@ import javax.swing.JLabel;
 
 public class MinefieldView extends View {
     private Cell cells[][];
+    private Minefield mineField;
+    private int cur_x;
+    private int cur_y;
+    public MinefieldView(Model m) {
+        super(m);
+        init();
 
-    public MinefieldView(Minefield minefield) {
-        super(minefield);
-        initView();
 
     }
 
-    public void propertyChange(PropertyChangeEvent evt) {
-//         if (evt.getPropertyName() != "location") {
-//              initView();
-//         }
-        Minefield mf = (Minefield) model;
-        int row = mf.getPlayerXC();
-        int col = mf.getPlayerYC();
-        cells[row][col].setBackground(Color.RED);
-        cells[row][col].setBorder(BorderFactory.createLineBorder(Color.white));
-        cells[row][col].setText("" + cells[row][col].patch.numMinedNubrs);
-        cells[row][col].repaint();
+    public void setModel(Model m){
+        super.setModel(m);
+        for (int row = 0; row < 10; row++) {
+            for (int col = 0; col < 10; col++) {
+                this.cells[row][col].setText("?");
+                this.cells[row][col].patch = ((Minefield) model).getPatch(row, col);
+                this.cells[row][col].setBorder(BorderFactory.createLineBorder(Color.black));
+                if (this.cells[row][col].patch.occupied) {
+                    this.cells[row][col].setBackground(Color.RED);
+                    this.cells[row][col].setBorder(BorderFactory.createLineBorder(Color.WHITE));
+                    this.cells[row][col].setText("" + cells[row][col].patch.numMinedNubrs);
+                }
+                if (this.cells[row][col].patch.goal) {
+                    this.cells[row][col].setBackground(Color.white);
+                    this.cells[row][col].setBorder(BorderFactory.createLineBorder(Color.green));
+                }
+            }
+        }
+
+        System.out.println("mineField, after");
+
+
     }
 
-
-
-    private void initView() {
+    public void init(){
         int dim = ((Minefield) model).getDim();
         cells = new Cell[dim][dim];
         setLayout(new GridLayout(dim, dim));
-
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 cells[row][col] = new Cell();
@@ -58,11 +69,23 @@ public class MinefieldView extends View {
         }
 
     }
-    public void setModel(Minefield mf){
-        super.setModel(mf);
-        initView();
-        System.out.println("setModel in Minefield");
+
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        Minefield mf = (Minefield) model;
+        int row = mf.getPlayerXC();
+        int col = mf.getPlayerYC();
+        cells[row][col].setBackground(Color.RED);
+        cells[row][col].setBorder(BorderFactory.createLineBorder(Color.white));
+        cells[row][col].setText("" + cells[row][col].patch.numMinedNubrs);
+        cells[row][col].repaint();
+
     }
+
+
+
+
+
 class Cell extends JLabel {
     Patch patch;
 }
