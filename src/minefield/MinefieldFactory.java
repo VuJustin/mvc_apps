@@ -9,7 +9,7 @@ public class MinefieldFactory implements AppFactory {
     }
 
     public View makeView(Model m) {
-        return new MinefieldView((Minefield) m);
+        return new MinefieldView(m);
     }
 
     public String[] getEditCommands() {
