@@ -1,9 +1,14 @@
 package minefield;
+
+
 import java.io.Serializable;
 
-class Patch implements Serializable {
-    boolean isMined = false;
-    int numMinedNbrs = 0;
+public class Patch implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    boolean mined = false;
+    int numMinedNubrs = 0;
+
     boolean occupied = false;
     boolean goal = false;
 }

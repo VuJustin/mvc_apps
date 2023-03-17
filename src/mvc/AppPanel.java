@@ -26,19 +26,20 @@ public class AppPanel extends JPanel implements ActionListener {
     private static int WIDTH = 600;
     private static int HEIGHT = 362;
 
-    public AppPanel(AppFactory appFactory) {
-        this.appFactory = appFactory;
+    public AppPanel(AppFactory factory) {
+        appFactory = factory;
         // create model, install controls & view
-        this.model = appFactory.makeModel();
+        model = appFactory.makeModel();
         // Setting the name of model
-        this.view = appFactory.makeView(model);
-        this.view.setBackground(Color.GRAY);
+        view = appFactory.makeView(model);
+        view.setBackground(Color.GRAY);
         // Control Panel created
         controls = new ControlPanel();
         controls.setBackground(Color.PINK);
-        this.setLayout((new GridLayout(1, 2)));
-        this.add(controls);
-        this.add(view);
+        controls.setLayout((new GridLayout(4, 2)));
+        setLayout((new GridLayout(1, 2)));
+        add(controls);
+        add(view);
         // create my frame with menus and display it
         frame = new SafeFrame();
         frame.setTitle(appFactory.getTitle());
