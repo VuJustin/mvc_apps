@@ -1,6 +1,9 @@
 package minefield;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import mvc.*;
@@ -9,6 +12,7 @@ public class Minefield extends Model {
     public static int mine_percent = 5;
     private Patch[][] patches;
     private Point playerLocation;
+    private List<Point> path;
     private int dim = 10;
 
     public Minefield() {
@@ -28,14 +32,17 @@ public class Minefield extends Model {
         patches[0][0].occupied = true;
         patches[dim - 1][dim - 1].goal = true;
         patches[dim - 1][dim - 1].mined = false;
-
+        path = new LinkedList<Point>();
+        path.add(playerLocation);
         updateMinedNeighbors();
     }
 
     public void initialize() {
 
     }
-
+    public Iterator<Point> getPath(){
+        return path.iterator();
+    }
     private void updateMinedNeighbors() {
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
@@ -120,9 +127,9 @@ public class Minefield extends Model {
         }
 
         patches[getPlayerXC()][getPlayerYC()].occupied = false;
-        playerLocation.setLocation(newRow, newCol);
+        playerLocation = new Point(newRow, newCol);
         patches[getPlayerXC()][getPlayerYC()].occupied = true;
-
+        path.add(playerLocation);
 
         changed();
     }

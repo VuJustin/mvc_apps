@@ -3,6 +3,7 @@ package minefield;
 import mvc.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -41,7 +42,14 @@ public class MinefieldView extends View {
         }
 
         System.out.println("mineField, after");
-
+        Iterator<Minefield.Point> a = mineField.getPath();
+        Minefield.Point path;
+        while(a.hasNext()){
+            path = a.next();
+            this.cells[path.getX()][path.getY()].setBackground(Color.RED);
+            this.cells[path.getX()][path.getY()].setBorder(BorderFactory.createLineBorder(Color.WHITE));
+            this.cells[path.getX()][path.getY()].setText("" + cells[path.getX()][path.getY()].patch.numMinedNubrs);
+        }
 
     }
 
