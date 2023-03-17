@@ -61,6 +61,7 @@ public class Minefield extends Model {
         playerLocation = new Point(0, 0);
         patches[0][0].occupied = true;
         patches[dim - 1][dim - 1].goal = true;
+        patches[dim - 1][dim - 1].mined = false;
 
         updateMinedNeighbors();
     }
@@ -151,6 +152,7 @@ public class Minefield extends Model {
         patches[getPlayerXC()][getPlayerYC()].occupied = false;
         playerLocation.setLocation(newRow, newCol);
         patches[getPlayerXC()][getPlayerYC()].occupied = true;
+
 
         changed();
     }
