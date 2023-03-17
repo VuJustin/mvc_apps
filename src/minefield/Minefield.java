@@ -5,36 +5,6 @@ import java.util.Random;
 
 import mvc.*;
 
-class Point {
-    public int x, y;
-
-    public Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return this.x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return this.y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setLocation(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 public class Minefield extends Model {
     public static int mine_percent = 5;
     private Patch[][] patches;
@@ -155,5 +125,34 @@ public class Minefield extends Model {
 
 
         changed();
+    }
+    class Point {
+        public int x, y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int getX() {
+            return this.x;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public int getY() {
+            return this.y;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
+
+        public void setLocation(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 }

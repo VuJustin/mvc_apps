@@ -36,6 +36,7 @@ public class AppPanel extends JPanel implements ActionListener {
         // Control Panel created
         controls = new ControlPanel();
         controls.setBackground(Color.PINK);
+        controls.setLayout((new GridLayout(4, 2)));
         this.setLayout((new GridLayout(1, 2)));
         this.add(controls);
         this.add(view);
