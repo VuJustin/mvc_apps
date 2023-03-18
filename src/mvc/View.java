@@ -18,7 +18,6 @@ public class View extends JPanel implements PropertyChangeListener{
         model.initSupport();
         model.addPropertyChangeListener(this);
         repaint();
-        System.out.println("mvc, first");
     }
 
     public void propertyChange(PropertyChangeEvent arg0) {

@@ -13,10 +13,6 @@ import javax.swing.JLabel;
 public class MinefieldView extends View {
     private Cell cells[][];
 
-    //These are never used
-    private Minefield mineField;
-    private int cur_x;
-    private int cur_y;
     public MinefieldView(Model m) {
         super(m);
         init();
@@ -43,7 +39,6 @@ public class MinefieldView extends View {
             }
         }
 
-        System.out.println("mineField, after");
         Iterator<Minefield.Point> a = ((Minefield) model).getPath();
         Minefield.Point path;
         //If a has the first point
