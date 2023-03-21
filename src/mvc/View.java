@@ -13,7 +13,7 @@ public class View extends JPanel implements PropertyChangeListener{
     }
 
     public void setModel(Model m){
-//        model.removePropertyChangeListener(this);
+       model.removePropertyChangeListener(this);
         model = m;
         model.initSupport();
         model.addPropertyChangeListener(this);
